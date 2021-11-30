@@ -1,0 +1,47 @@
+<h1>My Bookings</h1><br>
+
+<%= image_tag current_user.avatar, width: "10%" , height: "10%" if current_user.role != 'admin' and current_user.avatar.attached?%>
+
+<%# <p><%= current_user.inspect%>
+<p><%= link_to "New Booking" , new_booking_path%></p><br>
+<table class="table table-striped">
+    <tr>
+        <th>Place</th>
+        <th>Movie</th>
+        <th>Date</th>
+        <th>Time</th>
+    </tr>
+    <% if current_user.role == 'admin'%>
+        <% @bookings.each do |booking| %>
+    
+        <tr>
+            <td><%= booking.place %></td>
+            <td><%= booking.movie %></td>
+            <td><%= booking.date %></td>
+            <td><%= booking.time %></td>
+            <td><%= link_to "Show", booking_path(booking)%></td>
+            <td><%= link_to 'Delete', booking_path(booking), :confirm => 'Are you sure?', :method => :delete %></td>
+        </tr>
+
+    <% end %>
+    <% else %>
+    <% @bookings.each do |booking| %>
+        <%if booking.user_id == current_user.id%>
+        <tr>
+            <td><%= booking.place %></td>
+            <td><%= booking.movie %></td>
+            <td><%= booking.date %></td>
+            <td><%= booking.time %></td>     
+            <td><%= link_to "Show", booking_path(booking)%></td>       
+        </tr>
+        
+        <% end %>
+        
+    <%end%>
+<% end %>
+
+
+
+</table>
+
+

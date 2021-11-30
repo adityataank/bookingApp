@@ -1,0 +1,26 @@
+<h1>User</h1>   
+
+<%= image_tag @user.avatar, width: "10%", height: "10%" if @user.avatar.attached?%>
+
+<p>
+        User ID --> <%= @user.id%><br>
+</p>
+<p>
+        User E-Mail --> <%= @user.email%><br>
+</p>
+<table class = "table table-striped">
+    <tr>
+        <th>Movie Booked</th>
+        <th>Place</th>
+    </tr>
+    <% @user.bookings.each do |booking|%>
+        <tr>
+            <td><%= booking.movie%></td>
+            <td><%= booking.place%></td>
+        </tr>
+    <% end %>
+    
+</table>>
+
+
+<%= link_to "Destroy", admin_destroy_user_path(@user), method: :delete, data: { confirm: "You sure?" } %>

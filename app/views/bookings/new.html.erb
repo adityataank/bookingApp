@@ -1,0 +1,46 @@
+<div>
+<h1>New Booking</h1>
+<% if @booking.errors.any?%>
+    <p>Following errors occuerd</p>
+    <ul>
+        <% @booking.errors.full_messages.each do |msg|%>
+            <li><%=msg%></li>
+        <%end%>
+    </ul>
+<%end%>
+
+<%= form_for @booking do |f|%>
+        <p><%= f.label :place%><br>
+        <%= f.text_field :place%>
+        </p>
+        <p><%= f.label :movie%><br>
+        <%= f.text_field :movie%>
+        </p>
+        <p><%= f.label :date%><br>
+        <%= f.text_field :date%>
+        </p>
+        <p><%= f.label :time%><br>
+        <%= f.text_field :time%>
+        </p>
+        <p>
+        <%= f.number_field :user_id, id: :booking_user_id , value: current_user.id , type: :hidden%></p>
+        <strong>Price : ₹100</strong>
+        <p>Please attach your payment proof below:</p>
+        <p><%= f.label :payment_proof%> ==>
+        <%= f.file_field :payment_proof%>
+        </p>
+        <p>
+            <%= f.submit%>
+        </p>
+<% end %>
+<%= link_to "My Bookings" , bookings_path%>
+</div>
+
+
+
+
+
+
+
+
+
